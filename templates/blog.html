@@ -1,0 +1,215 @@
+{% extends "base.html" %}{% load static %}
+{% block body_block %}
+        <!--================Home Banner Area =================-->
+        <section class="banner_area" style="min-height:200px">
+            <div class="banner_inner d-flex align-items-center" style="min-height:200px">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>Blogs</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+        <!--================Blog Categorie Area =================-->
+        <section class="blog_categorie_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="{% static 'img/blog/cat-post/cat-post-3.jpg' %}" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="1"><h5>Social Life</h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Enjoy your social life together</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="{% static 'img/blog/cat-post/cat-post-2.jpg' %}" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="1"><h5>Bussiness</h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Latest Innovations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="{% static 'img/blog/cat-post/cat-post-1.jpg' %}" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="1"><h5>Food</h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Let the food be finished</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Categorie Area =================-->
+        
+        <!--================Blog Area =================-->
+        <section class="blog_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="blog_left_sidebar">
+
+
+                            {% for blog in blog_list %}
+                                <article class="row blog_item">
+                                   <div class="col-md-3">
+                                       <div class="blog_info text-right">
+                                            <div class="post_tag">
+                                                <a href="#">Food,</a>
+                                                <a class="active" href="#">Technology,</a>
+                                                <a href="#">Politics,</a>
+                                                <a href="#">Lifestyle</a>
+                                            </div>
+                                            <ul class="blog_meta list">
+                                                <li><a href="#">{{ blog.author }}<i class="lnr lnr-user"></i></a></li>
+                                                <li><a href="#">{{ blog.date }}<i class="lnr lnr-calendar-full"></i></a></li>
+                                                <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                            </ul>
+                                        </div>
+                                   </div>
+                                    <div class="col-md-9">
+                                        <div class="blog_post">
+                                            <img src="{{ blog.picture.url }}" alt="">
+                                            <div class="blog_details">
+                                                <a href="{{ blog.id }}"><h2>{{ blog.title }}</h2></a>
+                                                <p>{{ blog.content|safe|linebreaksbr|truncatewords:50 }}</p>
+                                                <a href="{{ blog.id }}" class="blog_btn">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            {% endfor %}
+
+
+                            <nav class="blog-pagination justify-content-center d-flex">
+		                        <ul class="pagination">
+		                            <li class="page-item">
+		                                <a href="#" class="page-link" aria-label="Previous">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-left"></span>
+		                                    </span>
+		                                </a>
+		                            </li>
+		                            <li class="page-item active"><a href="#" class="page-link">01</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">02</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">03</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">04</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">05</a></li>
+		                            <li class="page-item">
+		                                <a href="#" class="page-link" aria-label="Next">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-right"></span>
+		                                    </span>
+		                                </a>
+		                            </li>
+		                        </ul>
+		                    </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title">Popular Posts</h3>
+                                <div class="media post_item">
+                                    <img src="{% static 'img/blog/popular-post/post1.jpg' %}" alt="post">
+                                    <div class="media-body">
+                                        <a href="1"><h3>Space The Final Frontier</h3></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="media post_item">
+                                    <img src="{% static 'img/blog/popular-post/post2.jpg' %}" alt="post">
+                                    <div class="media-body">
+                                        <a href="1"><h3>The Amazing Hubble</h3></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="media post_item">
+                                    <img src="{% static 'img/blog/popular-post/post3.jpg' %}" alt="post">
+                                    <div class="media-body">
+                                        <a href="1"><h3>Astronomy Or Astrology</h3></a>
+                                        <p>03 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="media post_item">
+                                    <img src="{% static 'img/blog/popular-post/post4.jpg' %}" alt="post">
+                                    <div class="media-body">
+                                        <a href="1"><h3>Asteroids telescope</h3></a>
+                                        <p>01 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget ads_widget">
+                                <a href="#"><img class="img-fluid" src="{% static 'img/blog/add.jpg' %}" alt=""></a>
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title">Post Catgories</h4>
+                                <ul class="list cat-list">
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Technology</p>
+                                            <p>37</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Lifestyle</p>
+                                            <p>24</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Fashion</p>
+                                            <p>59</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Art</p>
+                                            <p>29</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Food</p>
+                                            <p>15</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Architecture</p>
+                                            <p>09</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Adventure</p>
+                                            <p>44</p>
+                                        </a>
+                                    </li>															
+                                </ul>
+                                <div class="br"></div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+{% endblock body_block %}

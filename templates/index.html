@@ -1,0 +1,131 @@
+{% extends "base.html" %}{% load static %}
+        
+	{% block body_block %}
+        <!--================Home Banner Area =================-->
+        <section class="home_banner_area">
+            <div class="banner_inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="home_left_img">
+								<img src="{% static 'img/banner/home_left_1.png' %}" alt="">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="banner_content">
+								<h5>This is me</h5>
+								<h2>Sandeep Raghuwanshi</h2>
+								<p>Some content about you here.</p>
+								<a class="banner_btn" href="{% url 'homeapp:about' %}">About</a>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Feature Area =================-->
+        <section class="feature_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Teaching</h2>
+        		</div>
+        		<div class="feature_inner row">
+        			{% for teaching in teachings_list %}
+						<div class="col-lg-6 col-md-6">
+        					<div class="feature_item">
+        						<h4>{{ teaching.title }}</h4>
+        						<p>{{ teaching.content }}</p>
+        					</div>
+        				</div>
+					{% endfor %}
+        		</div>
+        	</div>
+        </section>
+        <!--================End Feature Area =================-->
+        
+        <!--================Projects Area =================-->
+        <section class="projects_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+					<h2>Portfolio</h2>
+					<p>Loremm dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+				</div>
+        		<div class="projects_fillter">
+					<ul class="filter list">
+						<li class="active" data-filter="*"><a href="#">All Categories</a></li>
+						{% for cat in category_list %}
+							<li data-filter=".{{ cat }}"><a href="#">{{ cat|title }}</a></li>						
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="projects_inner row">
+					{% for portfolio in portfolio_list %}
+						<div class="col-lg-4 col-sm-6 {{ portfolio.category }}">
+							<div class="projects_item">
+								<img class="img-fluid" src="{{ portfolio.picture.url }}" alt="">
+								<div class="projects_text">
+									<a href="portfolio/{{ portfolio.id }}"><h4>{{ portfolio.title }}</h4></a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+        	</div>
+        </section>
+        <!--================End Projects Area =================-->
+
+		        <!--================Testimonials Area =================-->
+        <section class="testimonials_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Testimonials</h2>
+        			<p>What my acquaintances think about me?</p>
+        		</div>
+        		<div class="testi_inner">
+					<div class="testi_slider owl-carousel">
+					{% for testimonial in testimonials_list %}
+						<div class="item">
+							<div class="testi_item">
+								<p>{{testimonial.content}}</p>
+								<h4>{{testimonial.name}}</h4>
+								<small>{{ testimonial.designation }}</small>
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Testimonials Area =================-->
+		
+        <!--================Latest Blog Area =================-->
+        <section class="latest_blog_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Latest Posts from Blog</h2>
+        			<p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
+        		</div>
+        		<div class="row latest_blog_inner">
+        			{% for blog in blog_list %}
+						<div class="col-lg-4">
+							<div class="l_blog_item">
+								<div class="l_blog_img">
+									<img class="img-fluid" src="{{ blog.picture.url }}" alt="">
+								</div>
+								<div class="l_blog_text">
+									<div class="date">
+										<a href="#">{{ blog.date }}  |  By {{ blog.author }}</a>
+									</div>
+									<a href="blogs/{{ blog.id }}"><h4>{{ blog.title }}</h4></a>
+									<p>{{ blog.content|safe|linebreaksbr|truncatewords:50 }}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+        		</div>
+        	</div>
+        </section>
+        <!--================End Latest Blog Area =================-->
+	{% endblock body_block %}

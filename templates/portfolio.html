@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% load static %}
+{% block body_block %}
+        
+        <!--================Projects Area =================-->
+        <section class="projects_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+					<h2>Portfolio</h2>
+					<p>Loremm dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+				</div>
+        		<div class="projects_fillter">
+					<ul class="filter list">
+						<li class="active" data-filter="*"><a href="#">All Categories</a></li>
+						{% for cat in project_categories %}
+							<li data-filter=".{{ cat }}"><a href="#">{{ cat|title }}</a></li>						
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="projects_inner row">
+					{% for portfolio in portfolio_list %}
+						<div class="col-lg-4 col-sm-6 {{ portfolio.category }}">
+							<div class="projects_item">
+								<img class="img-fluid" src="{{ portfolio.picture.url }}" alt="">
+								<div class="projects_text">
+									<a href="{{ portfolio.id }}"><h4>{{ portfolio.title }}</h4></a>
+									{% comment %} <p>{{ portfolio.desc }}</p> {% endcomment %}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+        	</div>
+        </section>
+        <!--================End Projects Area =================-->
+{% endblock body_block %}
