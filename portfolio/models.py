@@ -4,12 +4,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Profile(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
     designation = models.CharField(max_length=100)
     bachelors = models.CharField(max_length=150)
     masters = models.CharField(max_length=150)
     phd = models.CharField(max_length=150)
     bio = models.TextField()
-    desc = models.TextField()
 
 class Categories(models.Model):
     category = models.CharField(max_length=50)
