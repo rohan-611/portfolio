@@ -14,6 +14,12 @@ class Portfolios(ListView):
         context['project_categories'] = Categories.objects.all()
         return context
 
+class ResearchAndPublicationsView(ListView):
+    model = ResearchAndPublications
+    context_object_name = 'randp'
+    template_name = "randp.html"
+
+
 def PortfolioDetail(request, pk):
     portfolio = get_object_or_404(Portfolio, id=pk, display=1)
     portfolio_desc = portfolio.desc.splitlines()
@@ -27,5 +33,15 @@ def PortfolioDetail(request, pk):
 
     return render(request, 'portfolio-details.html', context)
 
-class Profile(TemplateView):
-    template_name = "profile.html"
+def ResearchAndPublicationsDetails(request, pk):
+    randp = get_object_or_404(ResearchAndPublications, id=pk, display=1)
+    randp_desc = randp.desc.splitlines()
+    randp_details = randp.details.splitlines()
+
+    context = {
+        'randp': randp,
+        'randp_desc' : randp_desc,
+        'randp_details' : randp_details
+    }
+
+    return render(request, 'randp-details.html', context)

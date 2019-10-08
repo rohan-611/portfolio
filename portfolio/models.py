@@ -12,6 +12,17 @@ class Profile(models.Model):
     phd = models.CharField(max_length=150)
     bio = models.TextField()
 
+    def __str__(self):
+        return self.name
+    
+class About(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
+    
+
 class Categories(models.Model):
     category = models.CharField(max_length=50)
 
@@ -33,7 +44,6 @@ class Portfolio(models.Model):
 
 class ResearchAndPublications(models.Model):
     title = models.CharField(max_length=150)
-    picture = models.ImageField(upload_to='researchandpublications',default='default.png')
     desc = models.TextField()
     details = models.TextField()
     date = models.DateField()

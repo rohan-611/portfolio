@@ -3,5 +3,11 @@ from homeapp.models import Contact, Testimonials
 
 # Register your models here.
 
-admin.site.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['__str__','responded',  'name']
+
+    class Meta:
+        modal = Contact
+
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(Testimonials)

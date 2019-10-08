@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% load static %}
+{% block body_block %}
+        
+        <!--================Portfolio Details Area =================-->
+        <section class="portfolio_details_area p_120">
+        	<div class="container">
+        		<div class="portfolio_details_inner">
+					<div class="col-lg-12">
+						<blockquote class="generic-blockquote" style="border-left: 2px solid #8490ff">
+							<div class="portfolio_right_text">
+								<h2 style="color:#000000">{{ randp.title }}</h2>
+								<p>{{ randp.desc}}</p>
+								<ul class="list">
+									<li><span>Completed</span>:  {{ randp.date }}</li>
+								</ul><br>
+								<h5 style="color:#000000">Details :-</h5>
+								{% for para in randp_details %}
+									<p>{{ para }}</p>
+								{% endfor %}
+							</div>		
+						</blockquote>
+					</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Portfolio Details Area =================-->
+        
+{% endblock body_block %}

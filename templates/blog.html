@@ -41,14 +41,14 @@
                                             <div class="blog_details">
                                                 <a href="{% url 'blog:blogs' %}{{"blog-details"}}/{{ blog.id }}"><h2>{{ blog.title }}</h2></a>
                                                 <p>{{ blog.content|safe|linebreaksbr|truncatewords:50 }}</p>
-                                                <a href="{{ blog.id }}" class="blog_btn">View More</a>
+                                                <a href="{% url 'blog:blogs' %}{{"blog-details"}}/{{ blog.id }}" class="blog_btn">View More</a>
                                             </div>
                                         </div>
                                     </div>
                                     </article>
                                 {% endfor %}
                             {% else %}
-                                <h2>Threre are no blogs to be shown.</h2>
+                                <h2>There are no blogs to be shown of the selected category.</h2>
                             {% endif %}
 
                             <br>
@@ -85,7 +85,7 @@
                                 <div class="media post_item">
                                     <img src="{{ blog.picture.url }}" width=100px alt="post">
                                     <div class="media-body">
-                                        <a href="/{{blog.id}}"><h3>{{ blog.title }}</h3></a>
+                                        <a href="/blog-details/{{blog.id}}"><h3>{{ blog.title }}</h3></a>
                                         <p>{{ blog.date }}</p>
                                     </div>
                                 </div>

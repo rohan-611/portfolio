@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% load static %}        
+{% block body_block %}
+
+        <!--================Feature Area =================-->
+        <section class="feature_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Research & Publications</h2>
+        		</div>
+        		<div class="feature_inner row">
+					{% for item in randp %}
+						<div class="col-lg-4 col-md-6">
+							<a href="{{ item.id }}">
+        						<div class="feature_item">
+        							<h4>{{ item.title }}</h4>
+        							<p style='color:#737373'>{{ item.desc }}</p>
+        						</div>
+							</a>
+        				</div>
+					{% endfor %}
+        		</div>
+        	</div>
+        </section>
+        <!--================End Feature Area =================-->
+{% endblock body_block %}
