@@ -44,7 +44,7 @@
                                 <div class="media post_item">
                                     <img src="{{ blog.picture.url }}" width=100px alt="post">
                                     <div class="media-body">
-                                        <a href="/{{blog.id}}"><h3>{{ blog.title }}</h3></a>
+                                        <a href="{% url 'blog:blogs' %}blog-details/{{blog.id}}"><h3>{{ blog.title }}</h3></a>
                                         <p>{{ blog.date }}</p>
                                     </div>
                                 </div>
