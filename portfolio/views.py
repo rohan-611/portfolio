@@ -6,7 +6,7 @@ from blog.models import Blog
 # Create your views here.
 
 class Portfolios(ListView):
-    template_name = "portfolio.html"
+    template_name = "portfolio/portfolio.html"
     queryset = Portfolio.objects.filter(display=1).order_by('-date')
 
     def get_context_data(self, **kwargs):
@@ -17,7 +17,7 @@ class Portfolios(ListView):
 class ResearchAndPublicationsView(ListView):
     model = ResearchAndPublications
     context_object_name = 'randp'
-    template_name = "randp.html"
+    template_name = "portfolio/randp.html"
 
 
 def PortfolioDetail(request, pk):
@@ -31,7 +31,7 @@ def PortfolioDetail(request, pk):
         'portfolio_details' : portfolio_details
     }
 
-    return render(request, 'portfolio-details.html', context)
+    return render(request, 'portfolio/portfolio-details.html', context)
 
 def ResearchAndPublicationsDetails(request, pk):
     randp = get_object_or_404(ResearchAndPublications, id=pk, display=1)
@@ -44,4 +44,4 @@ def ResearchAndPublicationsDetails(request, pk):
         'randp_details' : randp_details
     }
 
-    return render(request, 'randp-details.html', context)
+    return render(request, 'portfolio/randp-details.html', context)

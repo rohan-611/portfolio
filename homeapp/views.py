@@ -8,7 +8,7 @@ from homeapp.models import Testimonials, Contact
 # Create your views here
 
 class Index(TemplateView):
-    template_name = "index.html"
+    template_name = "homeapp/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
@@ -37,10 +37,10 @@ def ContactView(request):
 
         return redirect("/")
     
-    return render(request, "contact.html")
+    return render(request, "homeapp/contact.html")
 
 class AboutView(TemplateView):
-    template_name = "about.html"
+    template_name = "homeapp/about.html"
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)

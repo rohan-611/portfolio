@@ -5,7 +5,7 @@ from .models import Blog, Teachings, Categories
 # Create your views here.
 
 class Blogs(ListView):
-    template_name = "blog.html"
+    template_name = "blog/blog.html"
     queryset = Blog.objects.filter(draft=0).order_by('-date')
 
     def get_context_data(self, **kwargs):
@@ -27,7 +27,7 @@ def BlogCategory(request, catid):
         'categories': categories
     }
 
-    return render(request, "blog.html", context)
+    return render(request, "blog/blog.html", context)
 
 def BlogDetail(request, pk):
         blog = get_object_or_404(Blog, id=pk, draft=False)
@@ -41,8 +41,8 @@ def BlogDetail(request, pk):
             'categories': category_list
         }
         
-        return render(request, 'blog_details.html', context)
+        return render(request, 'blog/blog_details.html', context)
 
 class Teachings(ListView):
-    template_name = "teachings.html"
+    template_name = "blog/teachings.html"
     queryset = Teachings.objects.filter(display=1).order_by('-id')
