@@ -1,9 +1,12 @@
 import os
 from dotenv import load_dotenv
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
 load_dotenv()
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ.get('DJANGO_SETTINGS_MODULE'))
 
 application = get_wsgi_application()
+
+application = WhiteNoise(application, root='./static')

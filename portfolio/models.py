@@ -49,6 +49,5 @@ class ResearchAndPublications(models.Model):
     date = models.DateField()
     display = models.BooleanField(default = 0)
 
-
     def __str__(self):
-        return self.title    
+        return self.title
