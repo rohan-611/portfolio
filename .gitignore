@@ -127,3 +127,4 @@ dmypy.json
 .pyre/
 uwsgi.ini
 static
+.DS_Store
