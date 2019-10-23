@@ -41,7 +41,7 @@ class Comment(models.Model):
         return self.comment
 
 
-class Replie(models.Model):
+class Reply(models.Model):
     comment_id = models.ForeignKey(Comments, on_delete=models.CASCADE, blank=True, null=True)
     user = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
@@ -50,3 +50,6 @@ class Replie(models.Model):
 
     def __str__(self):
         return self.comment
+
+    class Meta:
+        verbose_name_plural = 'replies'
