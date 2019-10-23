@@ -23,7 +23,7 @@ class About(models.Model):
         return self.title
     
 
-class Categories(models.Model):
+class Categorie(models.Model):
     category = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Portfolio(models.Model):
         return self.title
     
 
-class ResearchAndPublications(models.Model):
+class ResearchAndPublication(models.Model):
     title = models.CharField(max_length=150, blank=True, null=True)
     desc = models.TextField(blank=True, null=True)
     details = models.TextField(blank=True, null=True)

@@ -13,7 +13,7 @@ class Contact(models.Model):
         return self.subject
     
 
-class Testimonials(models.Model):
+class Testimonial(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     designation = models.CharField(max_length=50, blank=True, null=True)
     content = models.TextField(blank=True, null=True)

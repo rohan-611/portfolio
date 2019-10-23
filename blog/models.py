@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Categories(models.Model):
+class Categorie(models.Model):
     category = models.CharField(max_length = 50, blank=True, null=True)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-class Teachings(models.Model):
+class Teaching(models.Model):
 
     title = models.CharField( max_length=50, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
@@ -30,7 +30,7 @@ class Teachings(models.Model):
     def __str__(self):
         return self.content
 
-class Comments(models.Model):
+class Comment(models.Model):
     blog = models.ForeignKey(Blog , on_delete=models.CASCADE, blank=True, null=True)
     user = models.CharField(max_length=50, blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
@@ -41,7 +41,7 @@ class Comments(models.Model):
         return self.comment
 
 
-class Replies(models.Model):
+class Replie(models.Model):
     comment_id = models.ForeignKey(Comments, on_delete=models.CASCADE, blank=True, null=True)
     user = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
