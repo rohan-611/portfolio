@@ -8,15 +8,13 @@
 					<div class="col-lg-12">
 						<blockquote class="generic-blockquote" style="border-left: 2px solid #8490ff">
 							<div class="portfolio_right_text">
-								<h2 style="color:#000000">{{ randp.title }}</h2>
-								<p>{{ randp.desc}}</p>
+								<h2 style="color:#000000">{{ researchandpublication.title }}</h2>
+								<p>{{ researchandpublication.desc|linebreaksbr}}</p>
 								<ul class="list">
-									<li><span>Completed</span>:  {{ randp.date }}</li>
+									<li><span>Completed</span>:  {{ researchandpublication.date }}</li>
 								</ul><br>
 								<h5 style="color:#000000">Details :-</h5>
-								{% for para in randp_details %}
-									<p>{{ para }}</p>
-								{% endfor %}
+								{{ researchandpublication.details|linebreaksbr }}
 							</div>		
 						</blockquote>
 					</div>

@@ -13,16 +13,14 @@
 						<br><br>
 							<div class="portfolio_right_text">
 								<h4>{{ portfolio.title }}</h4>
-								<p>{{portfolio.desc}}</p>
+								<p>{{portfolio.desc|linebreaksbr}}</p>
 								<ul class="list">
 									<li><span>Completed</span>:  {{ portfolio.date }}</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					{% for para in portfolio_details %}
-						<p>{{para}}</p>
-					{% endfor %}
+					{{ portfolio.details|linebreaksbr }}
         		</div>
         	</div>
         </section>

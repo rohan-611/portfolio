@@ -2,17 +2,20 @@ from django.db import models
 
 # Create your models here.
 
-class Categorie(models.Model):
+class Category(models.Model):
     category = models.CharField(max_length = 50, blank=True, null=True)
 
     def __str__(self):
         return self.category
+    
+    class Meta:
+        verbose_name_plural = 'Categories'
 
 
 class Blog(models.Model):
     title = models.CharField(max_length=256, blank=True, null=True)
     picture = models.ImageField(upload_to='blog_pictures', default='default.jpg', blank=True, null=True)
-    category = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
     content = models.TextField(blank=True, null=True)
     author = models.CharField(max_length=50, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
@@ -42,7 +45,7 @@ class Comment(models.Model):
 
 
 class Reply(models.Model):
-    comment_id = models.ForeignKey(Comments, on_delete=models.CASCADE, blank=True, null=True)
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
     user = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
     date = models.DateField(auto_now=True, blank=True, null=True)

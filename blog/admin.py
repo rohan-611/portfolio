@@ -13,10 +13,10 @@ class CategoriesAdmin(admin.ModelAdmin):
     list_display = ['id', '__str__']
 
     class Meta:
-        modal = Categories
+        modal = Category
     
 admin.site.register(Blog, BlogAdmin)
-admin.site.register(Categories, CategoriesAdmin)
-admin.site.register(Teachings)
-admin.site.register(Comments)
-admin.site.register(Replies)
+admin.site.register(Category, CategoriesAdmin)
+admin.site.register(Teaching)
+admin.site.register(Comment)
+admin.site.register(Reply)

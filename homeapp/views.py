@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
-from blog.models import Blog, Teachings
-from portfolio.models import Portfolio, Categories, Profile, About
-from homeapp.models import Testimonials, Contact
+from blog.models import Blog, Teaching
+from portfolio.models import Portfolio, Category, Profile, About
+from homeapp.models import Testimonial, Contact
 
 # Create your views here
 
@@ -14,10 +14,10 @@ class Index(TemplateView):
         context = super(Index, self).get_context_data(**kwargs)
         context['profile'] = Profile.objects.all()[0]
         context['blog_list'] = Blog.objects.filter(draft=0).order_by("-date")[:3]
-        context['teachings_list'] = Teachings.objects.filter(display=1)[:4]
+        context['teachings_list'] = Teaching.objects.filter(display=1)[:4]
         context['portfolio_list'] = Portfolio.objects.filter(display=1)[:6]
-        context['category_list'] = Categories.objects.all()
-        context['testimonials_list'] = Testimonials.objects.filter(display=1)
+        context['category_list'] = Category.objects.all()
+        context['testimonials_list'] = Testimonial.objects.filter(display=1)
         return context
 
 def ContactView(request):
@@ -45,5 +45,5 @@ class AboutView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
         context['about_list'] = About.objects.all()
-        context['testimonials_list'] = Testimonials.objects.filter(display=1)
+        context['testimonials_list'] = Testimonial.objects.filter(display=1)
         return context

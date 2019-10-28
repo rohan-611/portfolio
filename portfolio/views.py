@@ -11,37 +11,18 @@ class Portfolios(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Portfolios, self).get_context_data(**kwargs)
-        context['project_categories'] = Categories.objects.all()
+        context['project_categories'] = Category.objects.all()
         return context
 
 class ResearchAndPublicationsView(ListView):
-    model = ResearchAndPublications
+    model = ResearchAndPublication
     context_object_name = 'randp'
     template_name = "portfolio/randp.html"
 
+class PortfolioDetailView(DetailView):
+    model = Portfolio
+    template_name = "portfolio/portfolio-details.html"
 
-def PortfolioDetail(request, pk):
-    portfolio = get_object_or_404(Portfolio, id=pk, display=1)
-    portfolio_desc = portfolio.desc.splitlines()
-    portfolio_details = portfolio.details.splitlines()
-
-    context = {
-        'portfolio': portfolio,
-        'portfolio_desc' : portfolio_desc,
-        'portfolio_details' : portfolio_details
-    }
-
-    return render(request, 'portfolio/portfolio-details.html', context)
-
-def ResearchAndPublicationsDetails(request, pk):
-    randp = get_object_or_404(ResearchAndPublications, id=pk, display=1)
-    randp_desc = randp.desc.splitlines()
-    randp_details = randp.details.splitlines()
-
-    context = {
-        'randp': randp,
-        'randp_desc' : randp_desc,
-        'randp_details' : randp_details
-    }
-
-    return render(request, 'portfolio/randp-details.html', context)
+class RandpDetailView(DetailView):
+    model = ResearchAndPublication
+    template_name = "portfolio/randp-details.html"
