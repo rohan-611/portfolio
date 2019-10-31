@@ -128,3 +128,6 @@ dmypy.json
 uwsgi.ini
 static
 .DS_Store
+
+
+.vscode

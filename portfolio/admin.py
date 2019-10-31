@@ -6,5 +6,5 @@ from .models import *
 admin.site.register(Profile)
 admin.site.register(About)
 admin.site.register(Portfolio)
-admin.site.register(ResearchAndPublications)
-admin.site.register(Categories)
+admin.site.register(ResearchAndPublication)
+admin.site.register(Category)
