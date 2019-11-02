@@ -58,6 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'homeapp.context_processor.profile',
             ],
         },
     },
@@ -102,3 +103,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
+
+# username to take into account
+USER_NAME = os.environ.get('AUTH_USERNAME')

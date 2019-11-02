@@ -6,11 +6,12 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
     designation = models.CharField(max_length=100, blank=True, null=True)
-    bachelors = models.CharField(max_length=150, blank=True, null=True)
-    masters = models.CharField(max_length=150, blank=True, null=True)
-    phd = models.CharField(max_length=150, blank=True, null=True)
+    facebook = models.URLField(max_length=200, blank=True, null=True)
+    linkedin = models.URLField(max_length=200, blank=True, null=True)
+    twitter = models.URLField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    
+    about = models.TextField(blank=True, null=True)
+
 class About(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
