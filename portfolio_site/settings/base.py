@@ -1,6 +1,6 @@
 import os
-
 import dotenv
+from easy_thumbnails.conf import Settings as ts
 
 dotenv.load_dotenv()
 
@@ -27,8 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'homeapp',
-    'portfolio',
+    'easy_thumbnails',
+    'image_cropping',
     'blog'
 ]
 
@@ -58,10 +60,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'homeapp.context_processors.profile'
             ],
         },
     },
 ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
+    }
+}
 
 WSGI_APPLICATION = 'portfolio_site.wsgi.application'
 
@@ -102,3 +116,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
+
+USER_NAME = get_env_var('USER_NAME')
+
+
+THUMBNAIL_PROCESSORS = (
+                           'image_cropping.thumbnail_processors.crop_corners',
+                       ) + ts.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}

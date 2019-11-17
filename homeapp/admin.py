@@ -1,13 +1,13 @@
 from django.contrib import admin
-from homeapp.models import Contact, Testimonial
+from image_cropping import ImageCroppingMixin
 
-# Register your models here.
+from homeapp import models
 
-class ContactAdmin(admin.ModelAdmin):
-    list_display = ['__str__','responded',  'name']
 
-    class Meta:
-        modal = Contact
+class TestimonialAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    pass
 
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(Testimonial)
+
+admin.site.register(models.Profile)
+admin.site.register(models.Publication)
+admin.site.register(models.Testimonial, TestimonialAdmin)

@@ -1,9 +1,0 @@
-TODO
-
-|--- Blog
-    |--- Add the text editor
-    |--- Add the like comment application
-    |--- Add Hashtags
-
-|--- homeapp
-    |--- Add functionalities of the contact page

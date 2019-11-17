@@ -1,37 +1,30 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, ListView, DetailView
-from .models import Blog, Teaching, Category
+from django.views import generic as dv
 
-# Create your views here.
+from .models import Blog, Article
 
-class Blogs(ListView):
-    template_name = "blog/blog.html"
-    queryset = Blog.objects.filter(draft=0).order_by('-date')
 
-    def get_context_data(self, **kwargs):
-        context = super(Blogs, self).get_context_data(**kwargs)
-        context['blogs'] = Blog.objects.filter(draft=0).order_by("-id")[:4]
-        context['categories'] = Category.objects.all()
-        return context
+class BlogView(dv.ListView):
+    template_name = 'blog/blog.html'
+    model = Article
+    paginate_by = 5
 
-def BlogCategory(request, catid):
-    cat = Categories.objects.filter(id=catid)[0].id
-    blog_list = Blog.objects.filter(draft = 0, category = cat).order_by("-id")
-    blogs = Blog.objects.filter(draft=0).order_by("-id")[:4]
-    categories = Category.objects.all()
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data()
+        ctx['blog_list'] = Blog.objects.all()
+        return ctx
 
-    context = {
-        'blogs': blogs,
-        'blog_list': blog_list,
-        'categories': categories
-    }
+    def get_queryset(self):
+        if self.kwargs.get('blog_name'):
+            return self.queryset_if_blog_name_given()
+        return self.queryset_if_no_blog_name_given()
 
-    return render(request, "blog/blog.html", context)
-    
-class BlogDetailView(DetailView):
-    model = Blog
-    template_name = "blog/blog_details.html"
+    def queryset_if_blog_name_given(self):
+        return self.model.objects.filter(blog__name=self.kwargs['blog_name'])
 
-class Teachings(ListView):
-    template_name = "blog/teachings.html"
-    queryset = Teaching.objects.filter(display=1).order_by('-id')
+    def queryset_if_no_blog_name_given(self):
+        return self.model.objects.all()
+
+
+class ArticleDetailView(dv.DetailView):
+    template_name = 'blog/article_detail.html'
+    model = Article

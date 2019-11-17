@@ -1,117 +1,174 @@
-{% extends "base.html" %}{% load static %}
-{% block body_block %}
-        <!--================Home Banner Area =================-->
-        <section class="banner_area" style="min-height:200px">
-            <div class="banner_inner d-flex align-items-center" style="min-height:200px">
-				<div class="container">
-					<div class="banner_content text-center">
-						<h2>Blogs</h2>
-					</div>
-				</div>
-            </div>
-        </section>
-        <!--================End Home Banner Area =================-->
-        
-        <!--================Blog Area =================-->
-        <section class="blog_area">
-        <br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="blog_left_sidebar">
+{% extends 'base.html' %}
+{% load static %}
+{% load cropping %}
+{% block meta_headers %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <title>Ronin Multi</title>
+{% endblock %}
 
-                            {% if blog_list %}
-                                {% for blog in blog_list %}
-                                    <article class="row blog_item">
-                                   <div class="col-md-3">
-                                       <div class="blog_info text-right">
-                                            <div class="post_tag">
-                                                <a class="active" href="#">{{ blog.category }}</a>
-                                            </div>
-                                            <ul class="blog_meta list">
-                                                <li><a href="#">{{ blog.author }}<i class="lnr lnr-user"></i></a></li>
-                                                <li><a href="#">{{ blog.date }}<i class="lnr lnr-calendar-full"></i></a></li>
-                                                {% comment %} <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li> {% endcomment %}
-                                            </ul>
-                                        </div>
-                                   </div>
-                                    <div class="col-md-9">
-                                        <div class="blog_post">
-                                            <img src="{{ blog.picture.url }}" alt="">
-                                            <div class="blog_details">
-                                                <a href="{% url 'blog:blogs' %}{{"blog-details"}}/{{ blog.id }}"><h2>{{ blog.title }}</h2></a>
-                                                <p>{{ blog.content|safe|linebreaksbr|truncatewords:50 }}</p>
-                                                <a href="{% url 'blog:blogs' %}{{"blog-details"}}/{{ blog.id }}" class="blog_btn">View More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </article>
-                                {% endfor %}
-                            {% else %}
-                                <h2>There are no blogs to be shown of the selected category.</h2>
-                            {% endif %}
+{% block content %}
 
-                            <br>
-                            {% comment %} <nav class="blog-pagination justify-content-center d-flex">
-		                        <ul class="pagination">
-		                            <li class="page-item">
-		                                <a href="#" class="page-link" aria-label="Previous">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-left"></span>
-		                                    </span>
-		                                </a>
-		                            </li>
-		                            <li class="page-item active"><a href="#" class="page-link">01</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">02</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">03</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">04</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">05</a></li>
-		                            <li class="page-item">
-		                                <a href="#" class="page-link" aria-label="Next">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-right"></span>
-		                                    </span>
-		                                </a>
-		                            </li>
-		                        </ul>
-		                    </nav> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">Recent Posts</h3>
-                                {% for blog in blogs %}
-                                <div class="media post_item">
-                                    <img src="{{ blog.picture.url }}" width=100px alt="post">
-                                    <div class="media-body">
-                                        <a href="{% url 'blog:blogs' %}blog-details/{{blog.id}}"><h3>{{ blog.title }}</h3></a>
-                                        <p>{{ blog.date }}</p>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget ads_widget">
-                                <a href="#"><img class="img-fluid" src="{% static 'img/blog/add.jpg' %}" alt=""></a>
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title">Post Catgories</h4>
-                                <ul class="list cat-list">
-                                    {% for category in categories %}
-                                        <li>
-                                            <a href="{% url 'blog:blogs'%}{{ category.id }}" class="d-flex justify-content-between">
-                                                <p>{{ category.category }}</p>
-                                            </a>
-                                        </li>
-                                    {% endfor %}                                    					
-                                </ul>
-                            </aside>
-                        </div>
+
+    <!--================Header Menu Area =================-->
+
+    {% if 'blog_name' in view.kwargs %}
+        <header class="header_area">
+    {% else %}
+        <header class="header_area white_menu">
+    {% endif %}
+        <div class="main_menu" id="mainNav">
+            {% include 'navbar.html' %}
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
+
+    <!--================Home Banner Area =================-->
+
+    <!--================End Home Banner Area =================-->
+{% if not 'blog_name' in view.kwargs %}
+        <section class="home_banner_area blog_banner">
+            <div class="banner_inner d-flex align-items-center">
+                <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+                     data-background=""></div>
+                <div class="container">
+                    <div class="blog_b_text text-center">
+                        <h2>Blog</h2>
+                        <p>Discover some articles.</p>
+                        <a class="white_bg_btn" href="#">View More</a>
                     </div>
                 </div>
             </div>
         </section>
-        <!--================Blog Area =================-->
-{% endblock body_block %}
+    <section class="blog_categorie_area">
+        <div class="container">
+            <div class="row">
+                {% for blog in blog_list %}
+                    {% if forloop.counter|divisibleby:"4" %}
+            </div>
+            <div class="row">
+                    {% endif %}
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="{% cropped_thumbnail blog "cropping" %}" alt="{{ blog.name }}">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="{{ blog.get_absolute_url }}"><h5>{{ blog.name }}</h5></a>
+                                    <div class="border_line"></div>
+                                    <p>{{ blog.tag_line }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <section class="home_banner_area" style="padding-top: 100px; padding-bottom: 30px">
+            <div class="banner_inner d-flex align-items-center">
+                <div class="container">
+                    <div class="blog_b_text text-center">
+                        <h2>{{ view.kwargs.blog_name }} <br/> Articles</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endif %}
+
+    <!--================Blog Categorie Area =================-->
+
+    <!--================Blog Area =================-->
+    <section class="blog_area" style="padding-top: 50px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="blog_left_sidebar">
+                        {% for article in article_list %}
+                            <article class="row blog_item">
+                                <div class="col-md-3">
+                                    <div class="blog_info text-right">
+                                        {#                                        <div class="post_tag">#}
+                                        {#                                            <a href="#">Food,</a>#}
+                                        {#                                            <a class="active" href="#">Technology,</a>#}
+                                        {#                                            <a href="#">Politics,</a>#}
+                                        {#                                            <a href="#">Lifestyle</a>#}
+                                        {#                                        </div>#}
+                                        <ul class="blog_meta list">
+                                            <li><a href="#">{{ article.author.full_name }}<i
+                                                    class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#">{{ article.publish_on|date:"d M'y" }}<i
+                                                    class="lnr lnr-calendar-full"></i></a></li>
+                                            {#                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>#}
+                                            {#                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>#}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="blog_post">
+                                        <img src="{% cropped_thumbnail article "cropping" scale=1 %}" alt="{{ article.title }}">
+                                        <div class="blog_details" style="text-align: justify">
+                                            <a href="{{ article.get_absolute_url }}"><h2>{{ article.title }}</h2>
+                                            </a>
+                                            <p>{{ article.short_description }}</p>
+                                            <a href="{{ article.get_absolute_url }}" class="blog_btn">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                        {% if is_paginated %}
+                            <nav class="blog-pagination justify-content-center d-flex">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a href="?page={{ page_obj.previous_page_number }}" class="page-link"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">
+                                                    <span class="lnr lnr-chevron-left"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {#                                    Shows +- 3 pages #}
+                                    {% for page_number in paginator.page_range %}
+                                        {% if page_number == 1 %}
+                                            <li class="page-item {% if page_obj.number == page_number %}active{% else %}{% endif %}">
+                                                <a href="?page=1" class="page-link">{{ page_number }}</a></li>
+                                        {% else %}
+                                            {% if page_number|add:"-3" <= page_obj.number and page_obj.number <= page_number|add:"3" %}
+                                                <li class="page-item {% if page_obj.number == page_number %}active{% else %}{% endif %}">
+                                                    <a href="?page={{ page_number }}"
+                                                       class="page-link">{{ page_number }}</a></li>
+                                            {% endif %}
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a href="?page={{ page_obj.next_page_number }}" class="page-link"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">
+                                                    <span class="lnr lnr-chevron-right"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+
+                    </div>
+                </div>
+{#                {% include 'blog/sidebar.html' %}#}
+            </div>
+        </div>
+    </section>
+
+{% include 'footer.html' %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'vendors/counter-up/jquery.counterup.min.js' %}"></script>
+{% endblock %}

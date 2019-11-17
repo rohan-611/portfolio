@@ -1,22 +1,19 @@
 from django.contrib import admin
-from .models import *
+from image_cropping import ImageCroppingMixin
+from import_export.admin import ImportExportModelAdmin
 
-# Register your models here.
+import blog.models as models
 
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ['id', '__str__', 'author']
 
+class BlogAdmin(ImageCroppingMixin, ImportExportModelAdmin):
     class Meta:
-        modal = Blog
+        model = models.Blog
 
-class CategoriesAdmin(admin.ModelAdmin):
-    list_display = ['id', '__str__']
 
+class ArticleAdmin(ImageCroppingMixin, ImportExportModelAdmin):
     class Meta:
-        modal = Category
-    
-admin.site.register(Blog, BlogAdmin)
-admin.site.register(Category, CategoriesAdmin)
-admin.site.register(Teaching)
-admin.site.register(Comment)
-admin.site.register(Reply)
+        model = models.Article
+
+
+admin.site.register(models.Blog, BlogAdmin)
+admin.site.register(models.Article, ArticleAdmin)
