@@ -12,6 +12,7 @@ django-image-cropping = "*"
 python-dotenv = "*"
 easy-thumbnails = "*"
 psycopg2 = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.7"
