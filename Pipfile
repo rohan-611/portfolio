@@ -9,7 +9,6 @@ verify_ssl = true
 django = "*"
 django-import-export = "*"
 django-image-cropping = "*"
-python-dotenv = "*"
 easy-thumbnails = "*"
 psycopg2 = "*"
 uwsgi = "*"
