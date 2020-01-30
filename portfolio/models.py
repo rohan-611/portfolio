@@ -1,6 +1,5 @@
 from django.db import models
 
-from blog.models import Category
 
 COUNTRY_CODES = [
     ('+91', 'INDIA')
@@ -44,7 +43,6 @@ class About(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=150, blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     picture = models.ImageField(upload_to='project_images', default='default.png', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     details = models.TextField(blank=True, null=True)
