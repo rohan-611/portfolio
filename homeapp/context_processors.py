@@ -2,19 +2,18 @@ from django.conf import settings
 
 from homeapp.models import Profile
 
-try:
-    def get_profile():
-        return Profile.objects.get(user__username=settings.USER_NAME)
+
+def get_profile():
+    return Profile.objects.get(user__username=settings.USER_NAME)
 
 
-    def profile(request):
+def profile(request):
+    try:
         p = get_profile()
         return {
             'profile': p
         }
-
-except NotImplemented('DB not implemented'):
-    def profile():
+    except:
         return {
             'profile': None
         }
